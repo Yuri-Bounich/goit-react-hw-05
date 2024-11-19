@@ -1,0 +1,22 @@
+.block {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background-color: rgb(227, 187, 122);
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  width: 100px;
+  height: 35px;
+  background-color: #5995ef;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #152f8d;
+  color: aqua;
+}
