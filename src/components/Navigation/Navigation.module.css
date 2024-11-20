@@ -1,0 +1,20 @@
+.block {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-left: 24px;
+  background-color: rgb(232, 212, 179);
+  border-bottom: 2px solid black;
+  box-shadow: 0 2px 8px;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+  font-size: 1.5rem;
+  color: rgb(58, 30, 30);
+  .active {
+    text-decoration: underline;
+    color: rgb(10, 10, 216);
+  }
+}
