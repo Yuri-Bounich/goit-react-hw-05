@@ -10,14 +10,19 @@ import '../index.css';
 // import ImageModal from './ImageModal/ImageModal';
 // import toast from 'react-hot-toast';
 import Navigation from './Navigation/Navigation';
+import HomePage from '../pages/HomePage/HomePage';
+import MoviesPage from '../pages/MoviesPage/MoviesPage';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 
 const App = () => {
   return (
     <div>
       <Navigation />
-      {/* <Routes>
-        <Route path="" element={}/>
-      </Routes> */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movies" element={<MoviesPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </div>
   );
 };

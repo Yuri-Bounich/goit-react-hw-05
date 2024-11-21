@@ -6,12 +6,11 @@ import clsx from 'clsx';
 const buildLinkClass = ({ isActive }) => {
   return clsx(s.link, isActive && s.active);
 };
-
+//NavLink робить активним посилання в браузері автоматично віщає isActive на активне посилання
 const Navigation = () => {
   return (
     <header className={s.block}>
       <nav className={s.nav}>
-        /*NavLink робить активним посилання*/
         <NavLink to="/" className={buildLinkClass}>
           Home
         </NavLink>
