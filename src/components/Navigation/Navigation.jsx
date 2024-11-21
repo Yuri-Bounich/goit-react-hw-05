@@ -11,6 +11,7 @@ const Navigation = () => {
   return (
     <header className={s.block}>
       <nav className={s.nav}>
+        /*NavLink робить активним посилання*/
         <NavLink to="/" className={buildLinkClass}>
           Home
         </NavLink>
