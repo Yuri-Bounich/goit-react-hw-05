@@ -66,3 +66,25 @@ export const fetchReviewsById = async movieId => {
   }
 };
 //https://api.themoviedb.org/3/movie/movie_id/reviews?language=en-US&page=1
+
+export const fetchSearchByInclude = async query => {
+  try {
+    const response = await axios.get(`/search/movie`, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+      },
+      params: {
+        query,
+        include_adult: 'false',
+        language: 'en-US',
+        page: 1,
+      },
+    });
+    console.log(import.meta.env.VITE_API_TOKEN);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+//https://api.themoviedb.org/3/search/movie?query=batman&include_adult=false&language=en-US&page=1
