@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
 import { fetchMovieById } from '../../services/api';
+import s from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
   // приміняємо useParams() щоб витягнути параметри  і зразу деструктуризуємо {movies.id}
@@ -39,9 +40,35 @@ const MovieDetailsPage = () => {
   // console.log(moviesId);
   return (
     <div>
-      {/* <p>MovieDetailsPage</p> */}
-      <p>{movie.title}</p>
-      <img src={movie.poster_path} />
+      <div className={s.title}>
+        <img
+          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+          alt={movie.title}
+        />
+        <ul>
+          <li>
+            <h2>{movie.title}</h2>
+          </li>
+          <li></li>
+          <li>Overview</li>
+          <li>{movie.overview}</li>
+          <li>
+            <h2>Genres</h2>
+          </li>
+          <li>
+            <ul>
+              {movies.map(movie => (
+                <li key={movie.id}>
+                  {/*робимо посилання на сторінку. обовязково toString(), тя лішки сприймають лише строку movie.id.toString()*/}
+                  <Link to={movie.id.toString()}>
+                    <p>{movie.title}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </li>
+        </ul>
+      </div>
       <nav>
         <Link to="cast">MovieCast</Link>
         <Link to="reviews">MovieReviews</Link>
