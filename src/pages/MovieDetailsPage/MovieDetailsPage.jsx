@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import { fetchMovieById } from '../../services/api';
 import s from './MovieDetailsPage.module.css';
 
@@ -38,6 +38,10 @@ const MovieDetailsPage = () => {
     return <p>movie not found</p>;
   }
   // console.log(moviesId);
+
+  const genres = movie.genres;
+  const date = movie.release_date;
+  const year = date.split('-')[0];
   return (
     <div>
       <div className={s.title}>
@@ -45,23 +49,25 @@ const MovieDetailsPage = () => {
           src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
           alt={movie.title}
         />
-        <ul>
+        <ul className={s.about}>
           <li>
-            <h2>{movie.title}</h2>
+            <h2>{`${movie.title} (${year})`}</h2>
           </li>
-          <li></li>
-          <li>Overview</li>
+          <li>User score: {movie.vote_average * 10}%</li>
+          <li>
+            <h2>Overview</h2>
+          </li>
           <li>{movie.overview}</li>
           <li>
             <h2>Genres</h2>
           </li>
           <li>
-            <ul>
-              {movies.map(movie => (
-                <li key={movie.id}>
-                  {/*робимо посилання на сторінку. обовязково toString(), тя лішки сприймають лише строку movie.id.toString()*/}
-                  <Link to={movie.id.toString()}>
-                    <p>{movie.title}</p>
+            <ul className={s.genres}>
+              {genres.map(genre => (
+                <li key={genre.id}>
+                  {/*робимо посилання на сторінку. обовязково toString(), тя to у Link сприймають лише строку **.id.toString()*/}
+                  <Link to={genre.id.toString()}>
+                    <p>{genre.name}</p>
                   </Link>
                 </li>
               ))}
@@ -69,10 +75,17 @@ const MovieDetailsPage = () => {
           </li>
         </ul>
       </div>
-      <nav>
-        <Link to="cast">MovieCast</Link>
-        <Link to="reviews">MovieReviews</Link>
-      </nav>
+      <div className={s.info}>
+        <p>Additional information</p>
+        <ul className={s.links}>
+          <li>
+            <NavLink to="cast">MovieCast</NavLink>
+          </li>
+          <li>
+            <NavLink to="reviews">MovieReviews</NavLink>
+          </li>
+        </ul>
+      </div>
       <Outlet />
     </div>
   );

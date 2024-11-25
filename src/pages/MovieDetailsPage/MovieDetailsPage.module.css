@@ -6,3 +6,34 @@
   border-bottom: 1px solid;
   margin-bottom: 20px;
 }
+
+.genres {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid;
+  margin-bottom: 20px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  list-style-type: disc; /* Встановлює круглі маркери */
+  padding-left: 20px; /* Додаємо відступ для списку */
+}
