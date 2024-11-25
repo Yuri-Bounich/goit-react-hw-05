@@ -1,18 +1,21 @@
 import axios from 'axios';
-const VITE_API_KEY = '5b9bf63027172f502bbc6def58c1af12';
+
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
 const fetchTrendMovie = async () => {
   try {
     const response = await axios.get(`/trending/movie/day`, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+      },
       params: {
-        api_key: VITE_API_KEY,
         language: 'en-US',
       },
     });
+
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error('Error:', error.response?.data || error.message);
     throw error;
   }
 };
@@ -21,8 +24,10 @@ export default fetchTrendMovie;
 export const fetchMovieById = async movieId => {
   try {
     const response = await axios.get(`/movie/${movieId}`, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+      },
       params: {
-        api_key: VITE_API_KEY,
         language: 'en-US',
       },
     });
@@ -36,8 +41,10 @@ export const fetchMovieById = async movieId => {
 export const fetchCreditsById = async movieId => {
   try {
     const response = await axios.get(`/movie/${movieId}/credits`, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+      },
       params: {
-        api_key: VITE_API_KEY,
         language: 'en-US',
       },
     });
@@ -53,8 +60,10 @@ export const fetchCreditsById = async movieId => {
 export const fetchReviewsById = async movieId => {
   try {
     const response = await axios.get(`/movie/${movieId}/reviews`, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+      },
       params: {
-        api_key: VITE_API_KEY,
         language: 'en-US',
         page: 1,
       },
@@ -73,6 +82,7 @@ export const fetchSearchByInclude = async query => {
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
       },
+
       params: {
         query,
         include_adult: 'false',
@@ -81,6 +91,7 @@ export const fetchSearchByInclude = async query => {
       },
     });
     console.log(import.meta.env.VITE_API_TOKEN);
+
     return response.data;
   } catch (error) {
     console.log(error);
