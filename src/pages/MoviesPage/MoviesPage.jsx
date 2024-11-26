@@ -1,10 +1,14 @@
 import { Field, Form, Formik } from 'formik';
 import s from './MoviesPage.module.css';
+import MovieList from '../../components/MovieList/MovieList';
+import { useState } from 'react';
 
-const MoviesPage = ({ onSubmit }) => {
+const MoviesPage = () => {
+  const [query, setQuery] = useState('');
+
   const initialValues = { query: '' };
   const handleSubmit = (values, options) => {
-    onSubmit(values.query);
+    setQuery(values.query);
     options.resetForm();
   };
 
@@ -18,6 +22,8 @@ const MoviesPage = ({ onSubmit }) => {
           </button>
         </Form>
       </Formik>
+      {/* Рендеримо список тільки якщо є пошуковий запит */}
+      {query && <MovieList query={query} />}
     </div>
   );
 };

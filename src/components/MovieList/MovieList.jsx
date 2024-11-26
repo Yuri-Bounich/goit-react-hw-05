@@ -1,39 +1,43 @@
 import { useEffect, useState } from 'react';
-import fetchTrendMovie from '../../services/api';
+import { fetchTrendMovie, fetchSearchByInclude } from '../../services/api';
 import { Link } from 'react-router-dom';
 import s from './MovieList.module.css';
-import MoviesPage from '../../pages/MoviesPage/MoviesPage';
 
-const MovieList = () => {
+const MovieList = ({ query }) => {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
+      setIsLoading(true);
+      setError(null);
+
       try {
-        const data = await fetchTrendMovie();
+        let data;
+        if (query) {
+          data = await fetchSearchByInclude(query);
+        } else {
+          data = await fetchTrendMovie();
+        }
         setMovies(data.results);
       } catch (error) {
+        setError('Failed to fetch movies');
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getData();
-  }, []);
+  }, [query]);
 
-  const filteredData = movies.filter(movie =>
-    movie.title.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const handleSetQuery = newValue => {
-    setQuery(newValue);
-  };
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div>
-      <h2 className={s.title}>Trending today</h2>
-      <MoviesPage onSubmit={handleSetQuery} />
       <ul className={s.list}>
-        {filteredData.map(movie => (
+        {movies.map(movie => (
           <li key={movie.id}>
             {/*робимо посилання на сторінку. обовязково toString(), тя лішки сприймають лише строку movie.id.toString()*/}
             <Link to={movie.id.toString()}>

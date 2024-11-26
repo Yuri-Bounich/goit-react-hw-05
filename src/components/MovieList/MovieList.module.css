@@ -1,0 +1,7 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  list-style-type: disc; /* Встановлює круглі маркери */
+  padding-left: 40px;
+}

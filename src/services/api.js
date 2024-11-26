@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
-const fetchTrendMovie = async () => {
+export const fetchTrendMovie = async () => {
   try {
     const response = await axios.get(`/trending/movie/day`, {
       headers: {
@@ -19,7 +19,6 @@ const fetchTrendMovie = async () => {
     throw error;
   }
 };
-export default fetchTrendMovie;
 
 export const fetchMovieById = async movieId => {
   try {
@@ -90,7 +89,6 @@ export const fetchSearchByInclude = async query => {
         page: 1,
       },
     });
-    console.log(import.meta.env.VITE_API_TOKEN);
 
     return response.data;
   } catch (error) {
