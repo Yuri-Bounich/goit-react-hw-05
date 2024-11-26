@@ -10,6 +10,7 @@ const buildLinkClass = ({ isActive }) => {
 
 const MovieDetailsPage = () => {
   // приміняємо useParams() щоб витягнути параметри  і зразу деструктуризуємо {movies.id}
+  // цим виразом витягуємо movieId (динамічний параметр) з URL
   const { movieId } = useParams();
 
   const [movie, setMovie] = useState(null);

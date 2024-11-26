@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import fetchTrendMovie from '../../services/api';
 import { Link } from 'react-router-dom';
-import s from './HomePage.module.css';
-import MoviesPage from '../MoviesPage/MoviesPage';
+import s from './MovieList.module.css';
+import MoviesPage from '../../pages/MoviesPage/MoviesPage';
 
-const HomePage = () => {
+const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
 
@@ -46,4 +46,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MovieList;
