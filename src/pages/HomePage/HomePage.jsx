@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import fetchTrendMovie from '../../services/api';
 import { Link } from 'react-router-dom';
+import s from './HomePage.module.css';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -17,8 +18,8 @@ const HomePage = () => {
   }, []);
   return (
     <div>
-      <h2>HomePage</h2>
-      <ul>
+      <h2 className={s.title}>Trending today</h2>
+      <ul className={s.list}>
         {movies.map(movie => (
           <li key={movie.id}>
             {/*робимо посилання на сторінку. обовязково toString(), тя лішки сприймають лише строку movie.id.toString()*/}

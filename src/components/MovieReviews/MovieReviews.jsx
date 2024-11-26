@@ -27,7 +27,7 @@ const MovieReviews = () => {
     };
     getData();
   }, [movieId]);
-  //бовязково слід додати тому що юзефект рендеритьсядвічііпри першому рендері - буде налл
+  //oбовязково слід додати тому що юзефект рендериться двічі і при першому рендері - буде налл
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -42,9 +42,9 @@ const MovieReviews = () => {
     <div>
       <ul className={s.block}>
         {reviews.map(review => (
-          <li key={review.id}>
-            {/* <h2>{cast.name}</h2> */}
-            {review.content}
+          <li className={s.item} key={review.id}>
+            <p className={s.title}>Author: {review.author}</p>
+            <p className={s.reviews}>{review.content}</p>
           </li>
         ))}
       </ul>

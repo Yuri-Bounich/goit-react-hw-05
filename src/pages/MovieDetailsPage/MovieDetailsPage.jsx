@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import { fetchMovieById } from '../../services/api';
 import s from './MovieDetailsPage.module.css';
+import clsx from 'clsx';
+
+const buildLinkClass = ({ isActive }) => {
+  return clsx(s.link, isActive && s.active);
+};
 
 const MovieDetailsPage = () => {
   // приміняємо useParams() щоб витягнути параметри  і зразу деструктуризуємо {movies.id}
@@ -46,7 +51,7 @@ const MovieDetailsPage = () => {
     <div>
       <div className={s.title}>
         <img
-          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
           alt={movie.title}
         />
         <ul className={s.about}>
@@ -79,10 +84,14 @@ const MovieDetailsPage = () => {
         <p>Additional information</p>
         <ul className={s.links}>
           <li>
-            <NavLink to="cast">MovieCast</NavLink>
+            <NavLink to="cast" className={clsx(buildLinkClass, s.item)}>
+              Cast
+            </NavLink>
           </li>
           <li>
-            <NavLink to="reviews">MovieReviews</NavLink>
+            <NavLink to="reviews" className={clsx(buildLinkClass, s.item)}>
+              Reviews
+            </NavLink>
           </li>
         </ul>
       </div>

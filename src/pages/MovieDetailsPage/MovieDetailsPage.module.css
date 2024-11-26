@@ -14,9 +14,10 @@
 }
 
 .about {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .info {
@@ -33,7 +34,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-
   list-style-type: disc; /* Встановлює круглі маркери */
-  padding-left: 20px; /* Додаємо відступ для списку */
+  padding-left: 40px; /* Додаємо відступ для списку */
+}
+
+.item:hover {
+  color: #4e75ff;
 }

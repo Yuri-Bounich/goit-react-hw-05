@@ -1,12 +1,12 @@
 import { Field, Form, Formik } from 'formik';
-import s from './MoviePage.module.css';
+import s from './MoviesPage.module.css';
 
-const MoviesPage = () => {
+const MoviesPage = ({ onSubmit }) => {
+  const initialValues = { query: '' };
   const handleSubmit = (values, options) => {
-    console.log(values);
+    onSubmit(values.query);
     options.resetForm();
   };
-  const initialValues = { query: '' };
 
   return (
     <div>

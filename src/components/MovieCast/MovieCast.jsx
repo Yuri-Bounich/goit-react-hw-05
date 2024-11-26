@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchCreditsById } from '../../services/api';
+import s from './MovieCast.module.css';
 
 const MovieCast = () => {
   // приміняємо useParams() щоб витягнути параметри  і зразу деструктуризуємо {movies.id}
@@ -37,19 +38,24 @@ const MovieCast = () => {
     return <p>Actor not found</p>;
   }
   // console.log(moviesId);
+  const defaultImg =
+    'https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster';
   return (
     <div>
       <ul>
         {casts.map(cast => (
-          <li key={cast.id}>
-            <h2>{cast.name}</h2>
-            {cast.profile_path && (
-              <img
-                src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`}
-                alt={cast.name}
-                width="100"
-              />
-            )}
+          <li key={cast.id} className={s.info}>
+            <img
+              src={
+                cast.profile_path
+                  ? `https://image.tmdb.org/t/p/w200${cast.profile_path}`
+                  : defaultImg
+              }
+              alt={cast.name}
+              width="200"
+            />
+            <p>{cast.name}</p>
+            <p>Character: {cast.character}</p>
           </li>
         ))}
       </ul>
