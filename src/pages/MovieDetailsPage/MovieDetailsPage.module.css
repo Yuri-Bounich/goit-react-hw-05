@@ -45,3 +45,12 @@
 .item:hover {
   color: #4e75ff;
 }
+
+.btn {
+  margin-bottom: 5px;
+  background-color: rgb(210, 227, 222);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: rgb(171, 171, 189);
+  margin-left: 5px;
+}

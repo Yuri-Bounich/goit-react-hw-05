@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -64,7 +64,11 @@ const MovieDetailsPage = () => {
       {/*Лок4) встановлюємо стейт локац для шляху повернення назад (повернеться на сторінку із збереженим пошуком а не просто сторінку пошуку*/}
       {/*current -  використовується для зберігання посилання  між рендерами. */}
       {/* при оновленні сторінки реф зітреться. тоді спрацює  ?? "/movies" */}
-      <Link to={goBackLink.current ?? '/movies'}>Go back</Link>
+      <Link to={goBackLink.current ?? '/movies'}>
+        <button type="button" className={s.btn}>
+          Go back
+        </button>
+      </Link>
       <div className={s.title}>
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
@@ -113,7 +117,10 @@ const MovieDetailsPage = () => {
           </li>
         </ul>
       </div>
-      <Outlet />
+      {/*ставимо саспенс щоб не вся сторінка перезагружалась а лише та част, яка рендериться в аутлеті*/}
+      <Suspense fallback={<h2>Wait a second again......</h2>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
