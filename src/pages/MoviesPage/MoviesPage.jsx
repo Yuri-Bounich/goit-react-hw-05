@@ -1,20 +1,25 @@
 import { Field, Form, Formik } from 'formik';
 import s from './MoviesPage.module.css';
 import MovieList from '../../components/MovieList/MovieList';
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const initialValues = { query: '' };
-  const handleSubmit = (values, options) => {
-    setQuery(values.query);
-    options.resetForm();
+  const query = searchParams.get('query') ?? '';
+
+  const handleSubmit = newValue => {
+    const { query } = newValue;
+    if (query.trim()) {
+      setSearchParams({ query });
+    } else {
+      setSearchParams({});
+    }
   };
 
   return (
     <div>
-      <Formik onSubmit={handleSubmit} initialValues={initialValues}>
+      <Formik onSubmit={handleSubmit} initialValues={{ query }}>
         <Form className={s.form}>
           <Field name="query" className={s.input} placeholder="Search movie" />
           <button className={s.btn} type="submit">

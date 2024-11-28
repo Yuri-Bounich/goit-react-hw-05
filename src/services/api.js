@@ -97,3 +97,5 @@ export const fetchSearchByInclude = async query => {
   }
 };
 //https://api.themoviedb.org/3/search/movie?query=batman&include_adult=false&language=en-US&page=1
+
+//https://api.themoviedb.org/3/movie/movie_id/videos?language=en-US

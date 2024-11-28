@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useParams,
+  useLocation,
+} from 'react-router-dom';
 import { fetchMovieById } from '../../services/api';
 import s from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
@@ -17,6 +23,11 @@ const MovieDetailsPage = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  // Лок3) встановлюємо константу для користування локацією тут
+  const location = useLocation();
+  console.log(location);
+  // Лок4) створюємо константу для збереження локації, тя при посл переходах локація зітреться зі стейту
+  const goBackLink = useRef(location.state);
 
   useEffect(() => {
     const getData = async () => {
@@ -50,6 +61,8 @@ const MovieDetailsPage = () => {
   const year = date.split('-')[0];
   return (
     <div>
+      {/*Лок4) встановлюємо стейт локац для шляху повернення назад (повернеться на сторінку із збереженим пошуком а не просто сторінку пошуку*/}
+      <Link to={location.state}>Go back</Link>
       <div className={s.title}>
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
@@ -59,7 +72,9 @@ const MovieDetailsPage = () => {
           <li>
             <h2>{`${movie.title} (${year})`}</h2>
           </li>
-          <li>User score: {movie.vote_average * 10}%</li>
+          <li className={s.percent}>
+            User score: {Math.round(movie.vote_average * 10)}%
+          </li>
           <li>
             <h2>Overview</h2>
           </li>

@@ -7,6 +7,10 @@
   margin-bottom: 20px;
 }
 
+.percent {
+  round: number;
+}
+
 .genres {
   display: flex;
   flex-direction: row;
