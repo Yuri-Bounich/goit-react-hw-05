@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -25,7 +25,7 @@ const MovieDetailsPage = () => {
   const [error, setError] = useState(null);
   // Лок3) встановлюємо константу для користування локацією тут
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   // Лок4) створюємо константу для збереження локації, тя при посл переходах локація зітреться зі стейту
   const goBackLink = useRef(location.state);
 
@@ -62,7 +62,9 @@ const MovieDetailsPage = () => {
   return (
     <div>
       {/*Лок4) встановлюємо стейт локац для шляху повернення назад (повернеться на сторінку із збереженим пошуком а не просто сторінку пошуку*/}
-      <Link to={location.state}>Go back</Link>
+      {/*current -  використовується для зберігання посилання  між рендерами. */}
+      {/* при оновленні сторінки реф зітреться. тоді спрацює  ?? "/movies" */}
+      <Link to={goBackLink.current ?? '/movies'}>Go back</Link>
       <div className={s.title}>
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}

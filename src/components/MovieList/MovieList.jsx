@@ -9,7 +9,7 @@ const MovieList = ({ query }) => {
   const [error, setError] = useState(null);
   // Лок1) константа для фіксації локації при вибірці (пошуку) даних
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   useEffect(() => {
     const getData = async () => {
